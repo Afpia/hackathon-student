@@ -14,6 +14,8 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 	SidebarMenuSub,
+	SidebarMenuSubButton,
+	SidebarMenuSubItem,
 	SidebarRail,
 	ToggleTheme
 } from '@/shared/ui'
@@ -21,12 +23,27 @@ import { ChevronRight, CircleUserRound, GraduationCap, Newspaper } from 'lucide-
 import Link from 'next/link'
 
 const data = {
-	projects: [
+	main: [
 		{
 			name: 'Профиль',
-			url: '/profile',
-			icon: CircleUserRound
-		},
+			icon: CircleUserRound,
+			items: [
+				{
+					title: 'Личные данные',
+					url: '/personal'
+				},
+				{
+					title: 'Расписание',
+					url: '/schedule'
+				},
+				{
+					title: 'Статистика',
+					url: '/stats'
+				}
+			]
+		}
+	],
+	second: [
 		{
 			name: 'Преподаватели',
 			url: '/teachers',
@@ -47,7 +64,33 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<SidebarGroup className='group-data-[collapsible=icon]:block'>
 					<SidebarGroupLabel>Главное</SidebarGroupLabel>
 					<SidebarMenu>
-						{data.projects.map((item) => (
+						{data.main.map((item) => (
+							<Collapsible key={item.name} asChild defaultOpen className='group/collapsible'>
+								<SidebarMenuItem>
+									<CollapsibleTrigger asChild>
+										<SidebarMenuButton tooltip={item.name}>
+											{item.icon && <item.icon />}
+											<span>{item.name}</span>
+											<ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />
+										</SidebarMenuButton>
+									</CollapsibleTrigger>
+									<CollapsibleContent>
+										<SidebarMenuSub>
+											{item.items?.map((subItem) => (
+												<SidebarMenuSubItem key={subItem.title}>
+													<SidebarMenuSubButton asChild>
+														<Link href={subItem.url}>
+															<span>{subItem.title}</span>
+														</Link>
+													</SidebarMenuSubButton>
+												</SidebarMenuSubItem>
+											))}
+										</SidebarMenuSub>
+									</CollapsibleContent>
+								</SidebarMenuItem>
+							</Collapsible>
+						))}
+						{data.second.map((item) => (
 							<SidebarMenuItem key={item.name}>
 								<SidebarMenuButton asChild>
 									<Link href={item.url}>
