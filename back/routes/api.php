@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Http\Request;
@@ -29,3 +30,7 @@ Route::get('/teachers', [TeacherController::class, 'index']);
 Route::get('/students/{id}', [StudentController::class, 'show']);
 
 Route::get('groups/{groupId}/students', [GroupController::class, 'getStudentsInGroup']);
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('schedules/notes', [ScheduleController::class, 'getSchedulesWithNotes']);
+}); 
