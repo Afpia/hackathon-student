@@ -20,7 +20,7 @@ class UserRepository extends BaseRepository
 
     public function getAllTeachersWithSubjects()
     {
-        return User::where('type', 'teacher') 
+        return $this->model->where('role', 'teacher') 
             ->select(['id', 'name', 'email', 'phone', 'image_url']) 
             ->with([
                 'subjects:id,name' 
