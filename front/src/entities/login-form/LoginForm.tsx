@@ -1,7 +1,6 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
@@ -28,7 +27,6 @@ import { LoginSchema, type TypeLoginSchema } from './scheme'
 
 export function LoginForm() {
 	const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
-	const [isShowTwoFactor, setIsShowFactor] = useState(false)
 
 	const form = useForm<TypeLoginSchema>({
 		resolver: zodResolver(LoginSchema),
@@ -60,7 +58,7 @@ export function LoginForm() {
 						<FormField
 							control={form.control}
 							name='email'
-							render={({ field }) => (
+							render={({ field }: any) => (
 								<FormItem>
 									<FormLabel>Почта</FormLabel>
 									<FormControl>
@@ -78,7 +76,7 @@ export function LoginForm() {
 						<FormField
 							control={form.control}
 							name='password'
-							render={({ field }) => (
+							render={({ field }: any) => (
 								<FormItem>
 									<FormLabel>Пароль</FormLabel>
 									<FormControl>
@@ -94,10 +92,7 @@ export function LoginForm() {
 							)}
 						/>
 						<div className='flex justify-center'>
-							<ReCAPTCHA
-								sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string}
-								onChange={setRecaptchaValue}
-							/>
+							<ReCAPTCHA sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string} onChange={setRecaptchaValue} />
 						</div>
 						<Button
 							type='submit'

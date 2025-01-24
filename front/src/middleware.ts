@@ -6,10 +6,14 @@ export default function middleware(request: NextRequest) {
 	const session = cookies.get('session')?.value
 
 	const isAuthPage = url.includes('/auth')
+	
+	if (request.nextUrl.pathname === '/') {
+		return NextResponse.redirect(new URL('/personal', url))
+	}
 
 	if (isAuthPage) {
 		if (session) {
-			return NextResponse.redirect(new URL('/profile', url))
+			return NextResponse.redirect(new URL('/personal', url))
 		}
 
 		return NextResponse.next()
@@ -21,5 +25,9 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/auth/login', '/profile']
+	matcher: [
+		'/auth/login',
+		// '/profile',
+		'/'
+	]
 }

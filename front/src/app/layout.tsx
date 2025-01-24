@@ -28,13 +28,7 @@ export default function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<body className={geistSans.variable}>
 				<MainProvider>
-					<div className='relative flex min-h-screen flex-col'>
-						<div className='flex justify-between px-4 pt-4'>
-							<ToggleTheme />
-							<Header />
-						</div>
-						<div className='h-[calc(100vh-64px)] w-full px-4 pt-4'>{children}</div>
-					</div>
+					<div className='h-screen w-full'>{children}</div>
 				</MainProvider>
 			</body>
 		</html>
