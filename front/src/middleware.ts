@@ -6,7 +6,7 @@ export default function middleware(request: NextRequest) {
 	const session = cookies.get('session')?.value
 
 	const isAuthPage = url.includes('/auth')
-	
+
 	if (request.nextUrl.pathname === '/') {
 		return NextResponse.redirect(new URL('/personal', url))
 	}
@@ -25,9 +25,6 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: [
-		'/auth/login',
-		// '/profile',
-		'/'
-	]
+	matcher: ['/auth/login', '/']
+	// matcher: ['/auth/login', '/personal', '/schedule', '/stats', '/news', '/teachers', '/']
 }
