@@ -23,8 +23,8 @@ class LoginController extends Controller
         $response = $this->service->login($request->validated());
 
         return match ($response['status']) {
-            'error' => $this->error($response['message'], self::HTTP_UNAUTHORIZED),
-            default => $this->success($response['data'], self::HTTP_CREATED),
+            'error' => $this->error($response['message'], 401),
+            default => $this->success($response['data'], 201),
         };
     }
 }

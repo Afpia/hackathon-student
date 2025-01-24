@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+    ];
+
+    public function teachers()
+    {
+        return $this->belongsToMany(User::class, 'teacher_subject', 'subject_id', 'teacher_id')
+                    ->withTimestamps();
+    }
 }
