@@ -1,18 +1,6 @@
 import { AppSidebar } from '@/widgets/sidebar'
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-	Separator,
-	SidebarInset,
-	SidebarProvider,
-	SidebarTrigger
-} from '@/shared/ui'
-import { BreadcrumbCurrent } from '@/shared/utils'
-import Link from 'next/link'
+import { Breadcrumb, Separator, SidebarInset, SidebarProvider, SidebarTrigger } from '@/shared/ui'
+import { BreadcrumbDynamic } from '@/entities/breadcrumb'
 
 export default function UserLayout({
 	children
@@ -28,19 +16,7 @@ export default function UserLayout({
 						<SidebarTrigger className='-ml-1' />
 						<Separator orientation='vertical' className='mr-2 h-4' />
 						<Breadcrumb>
-							<BreadcrumbList>
-								<BreadcrumbItem className='hidden md:block'>
-									<Link href='/profile'>
-										<BreadcrumbCurrent first={true} />
-									</Link>
-								</BreadcrumbItem>
-								<BreadcrumbSeparator className='hidden md:block' />
-								<BreadcrumbItem>
-									<BreadcrumbPage>
-										<BreadcrumbCurrent second={true} />
-									</BreadcrumbPage>
-								</BreadcrumbItem>
-							</BreadcrumbList>
+							<BreadcrumbDynamic />
 						</Breadcrumb>
 					</div>
 				</header>

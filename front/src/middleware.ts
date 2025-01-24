@@ -6,14 +6,14 @@ export default function middleware(request: NextRequest) {
 	const session = cookies.get('session')?.value
 
 	const isAuthPage = url.includes('/auth')
-	console.log(request.nextUrl.pathname)
+	
 	if (request.nextUrl.pathname === '/') {
-		return NextResponse.redirect(new URL('/profile', url))
+		return NextResponse.redirect(new URL('/personal', url))
 	}
 
 	if (isAuthPage) {
 		if (session) {
-			return NextResponse.redirect(new URL('/profile', url))
+			return NextResponse.redirect(new URL('/personal', url))
 		}
 
 		return NextResponse.next()

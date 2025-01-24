@@ -1,7 +1,6 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
@@ -59,7 +58,7 @@ export function LoginForm() {
 						<FormField
 							control={form.control}
 							name='email'
-							render={({ field }) => (
+							render={({ field }: any) => (
 								<FormItem>
 									<FormLabel>Почта</FormLabel>
 									<FormControl>
@@ -77,7 +76,7 @@ export function LoginForm() {
 						<FormField
 							control={form.control}
 							name='password'
-							render={({ field }) => (
+							render={({ field }: any) => (
 								<FormItem>
 									<FormLabel>Пароль</FormLabel>
 									<FormControl>
