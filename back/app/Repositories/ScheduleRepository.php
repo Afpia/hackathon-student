@@ -16,15 +16,20 @@ class ScheduleRepository extends BaseRepository
 
     public function getSchedulesWithNotes(string $startDate, string $endDate)
     {
+        $userId = Auth::id();
+
         return $this->model->with([
             'subject:id,name',
             'teacher:id,name,email',
             'group:id,name',
-            'notes' => function ($query) {
-                $query->where('student_id', Auth::id());
+            'notes' => function ($query) use ($userId) {
+                $query->where('student_id', $userId);
             },
             'notes.student:id,name,email'
         ])
+            ->whereHas('group.students', function ($query) use ($userId) {
+                $query->where('student_id', $userId);
+            })
             ->whereBetween('day', [$startDate, $endDate])
             ->orderBy('day')
             ->orderBy('pair_number')

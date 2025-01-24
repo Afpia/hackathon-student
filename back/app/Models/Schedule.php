@@ -29,7 +29,7 @@ class Schedule extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'teacher_id')->where('type', 'teacher');
+        return $this->belongsTo(User::class, 'teacher_id')->where('role', 'teacher');
     }
 
     public function group()
