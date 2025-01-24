@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Group::class, 'group_student', 'student_id', 'group_id');
     }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'student_id');
+    }
 }
