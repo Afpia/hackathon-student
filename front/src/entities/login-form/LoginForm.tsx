@@ -28,7 +28,6 @@ import { LoginSchema, type TypeLoginSchema } from './scheme'
 
 export function LoginForm() {
 	const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
-	const [isShowTwoFactor, setIsShowFactor] = useState(false)
 
 	const form = useForm<TypeLoginSchema>({
 		resolver: zodResolver(LoginSchema),
@@ -94,10 +93,7 @@ export function LoginForm() {
 							)}
 						/>
 						<div className='flex justify-center'>
-							<ReCAPTCHA
-								sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string}
-								onChange={setRecaptchaValue}
-							/>
+							<ReCAPTCHA sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string} onChange={setRecaptchaValue} />
 						</div>
 						<Button
 							type='submit'
