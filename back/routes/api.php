@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ScheduleController;
@@ -33,4 +34,8 @@ Route::get('groups/{groupId}/students', [GroupController::class, 'getStudentsInG
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('schedules/notes', [ScheduleController::class, 'getSchedulesWithNotes']);
+
+    Route::get('/profile', [StudentController::class, 'profile']);
+
+    Route::get('/grades/average', [GradeController::class, 'getAverageGradesForGroup']);
 }); 

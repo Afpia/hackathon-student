@@ -36,4 +36,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function grades()
+    {
+        return $this->hasMany(Grade::class, 'schedule_id');
+    }
 }
