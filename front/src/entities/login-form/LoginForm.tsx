@@ -22,8 +22,8 @@ import {
 	Input
 } from '@/shared/ui'
 
-// import { useLoginMutation } from '../hooks'
 import { LoginSchema, type TypeLoginSchema } from './scheme'
+import { useLoginMutation } from './hooks/useLoginMutation'
 
 export function LoginForm() {
 	const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
@@ -35,11 +35,11 @@ export function LoginForm() {
 			password: ''
 		}
 	})
-	// const { login, isLoadingLogin } = useLoginMutation(setIsShowFactor)
+	const { login, isLoadingLogin } = useLoginMutation()
 
 	const onSubmit = (values: TypeLoginSchema) => {
 		if (recaptchaValue) {
-			// login({ values, recaptcha: recaptchaValue })
+			login({ values })
 			console.log(values)
 		} else {
 			toast.error('Пожалуйста, завершите reCAPTCHA')
@@ -62,12 +62,7 @@ export function LoginForm() {
 								<FormItem>
 									<FormLabel>Почта</FormLabel>
 									<FormControl>
-										<Input
-											placeholder='ivan@example.com'
-											// disabled={isLoadingLogin}
-											type='email'
-											{...field}
-										/>
+										<Input placeholder='ivan@example.com' disabled={isLoadingLogin} type='email' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -80,12 +75,7 @@ export function LoginForm() {
 								<FormItem>
 									<FormLabel>Пароль</FormLabel>
 									<FormControl>
-										<Input
-											placeholder='******'
-											// disabled={isLoadingLogin}
-											type='password'
-											{...field}
-										/>
+										<Input placeholder='******' disabled={isLoadingLogin} type='password' {...field} />
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -94,11 +84,7 @@ export function LoginForm() {
 						<div className='flex justify-center'>
 							<ReCAPTCHA sitekey={process.env.GOOGLE_RECAPTCHA_SITE_KEY as string} onChange={setRecaptchaValue} />
 						</div>
-						<Button
-							type='submit'
-
-							// disabled={isLoadingLogin}
-						>
+						<Button type='submit' disabled={isLoadingLogin}>
 							Войти в аккаунт
 						</Button>
 					</form>
