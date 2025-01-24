@@ -1,6 +1,4 @@
 import { Metadata } from 'next'
-import { TeacherCard } from '@/entities/teacher-card'
-import axios from 'axios'
 import { Avatar, AvatarFallback, AvatarImage, Card, CardContent, CardHeader, CardTitle } from '@/shared/ui'
 
 export const metadata: Metadata = {
@@ -18,10 +16,10 @@ export default async function Teachers() {
 
 	return (
 		<div className='grid grid-cols-4 pt-4'>
-			{data?.teachers.map((teacher: { id: number; name: string; subject: { name: string }[]; phone: string; email: string }) => (
+			{data?.teachers?.map((teacher: { id: number; name: string; subject: { name: string }[]; phone: string; email: string }) => (
 				<Card className='w-[300px]' key={teacher.id}>
 					<CardHeader>
-						<CardTitle className='flex flex-col items-center justify-center'>
+						<CardTitle className='flex flex-col items-center justify-center gap-2'>
 							<Avatar className='h-24 w-24'>
 								<AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
 								<AvatarFallback>CN</AvatarFallback>
