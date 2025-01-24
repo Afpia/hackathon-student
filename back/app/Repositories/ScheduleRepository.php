@@ -22,6 +22,9 @@ class ScheduleRepository extends BaseRepository
             'subject:id,name',
             'teacher:id,name,email',
             'group:id,name',
+            'grades' => function ($query) use ($userId) {
+                $query->where('student_id', $userId);
+            },
             'notes' => function ($query) use ($userId) {
                 $query->where('student_id', $userId);
             },
@@ -42,7 +45,13 @@ class ScheduleRepository extends BaseRepository
                     'subject' => $schedule->subject ? $schedule->subject->name : null,
                     'teacher' => $schedule->teacher ? $schedule->teacher->name : null,
                     'group' => $schedule->group ? $schedule->group->name : null,
-                    'notes' => $schedule->notes
+                    'notes' => $schedule->notes,
+                    'grades' => $schedule->grades->map(function ($grade) {
+                        return [
+                            'grade' => $grade->grade,
+                            'comment' => $grade->comment
+                        ];
+                    }),
                 ];
             });
     }

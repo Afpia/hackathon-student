@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository extends BaseRepository
 {
@@ -20,11 +21,21 @@ class UserRepository extends BaseRepository
 
     public function getAllTeachersWithSubjects()
     {
-        return $this->model->where('role', 'teacher') 
-            ->select(['id', 'name', 'email', 'phone', 'image_url']) 
+        return $this->model->where('role', 'teacher')
+            ->select(['id', 'name', 'email', 'phone', 'image_url'])
             ->with([
-                'subjects:id,name' 
+                'subjects:id,name'
             ])
             ->get();
+    }
+
+    public function getUserProfileWithGroup()
+    {
+        $userId = Auth::id();
+
+        return User::with('groups:id,name')
+            ->select('id', 'name', 'email', 'role')
+            ->where('id', $userId)
+            ->first();
     }
 }
