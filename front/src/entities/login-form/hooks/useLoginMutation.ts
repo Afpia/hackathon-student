@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import Cookies from 'js-cookie'
 
 import { toastMessageHandler } from '@/shared/utils'
 
@@ -23,6 +24,10 @@ export function useLoginMutation() {
 			if (data.message) {
 				toastMessageHandler(data)
 			} else {
+				Cookies.set('token', data.access_token, {
+					expires: 7,
+					sameSite: 'Strict'
+				})
 				toast.success('Успешная авторизация')
 				router.push('/personal')
 			}
