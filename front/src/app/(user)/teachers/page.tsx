@@ -30,7 +30,7 @@ export default async function Teachers() {
 						</CardTitle>
 					</CardHeader>
 					<CardContent className='flex flex-col'>
-						<p>Предмет: {teacher.subject.map((subject) => subject.name).join(', ')}</p>
+						<p>Предмет: {teacher.subject?.map((subject) => subject.name).join(', ')}</p>
 						<p>Телефон: {teacher.phone}</p>
 						<p>Почта: {teacher.email}</p>
 					</CardContent>

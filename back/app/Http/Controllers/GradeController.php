@@ -24,8 +24,7 @@ class GradeController extends Controller
         return $this->success([
             'group_id' => $data['group_id'],
             'group_name' => $data['group_name'],
-            'group_average_grades' => $data['group_average_grades'],
-            'user_average_grade' => $data['user_average_grade'],
+            'group_average_grades' => $data['students'],
         ]);
     }
 }
