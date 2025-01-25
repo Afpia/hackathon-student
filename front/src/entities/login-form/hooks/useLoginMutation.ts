@@ -24,12 +24,14 @@ export function useLoginMutation() {
 			if (data.message) {
 				toastMessageHandler(data)
 			} else {
-				Cookies.set('token', data.access_token, {
+				router.push('/personal')
+				
+				Cookies.set('token', data.data.access_token, {
 					expires: 7,
 					sameSite: 'Strict'
 				})
+
 				toast.success('Успешная авторизация')
-				router.push('/personal')
 			}
 		},
 		onError(error) {

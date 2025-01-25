@@ -1,9 +1,10 @@
 import { type NextRequest, NextResponse } from 'next/server'
+import Cookies from 'js-cookie'
 
 export default function middleware(request: NextRequest) {
 	const { url, cookies } = request
 
-	const session = cookies.get('session')?.value
+	const session = cookies.get('token')?.value
 
 	const isAuthPage = url.includes('/auth')
 
@@ -25,6 +26,6 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/auth/login', '/']
-	// matcher: ['/auth/login', '/personal', '/schedule', '/stats', '/news', '/teachers', '/']
+	// matcher: ['/auth/login', '/']
+	matcher: ['/auth/login', '/personal', '/schedule', '/stats', '/news', '/teachers', '/']
 }
