@@ -26,6 +26,6 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-	// matcher: ['/auth/login', '/']
-	matcher: ['/auth/login', '/personal', '/schedule', '/stats', '/news', '/teachers', '/']
+	matcher: ['/auth/login', '/']
+	// matcher: ['/auth/login', '/personal', '/schedule', '/stats', '/news', '/teachers', '/']
 }
