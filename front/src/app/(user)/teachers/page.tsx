@@ -8,9 +8,7 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function Teachers() {
-	const { data } = await fetch(`${process.env.SERVER_URL}/teachers`)
-		.then((res) => res.json())
-		.catch((error) => console.error(error))
+	const { data } = await fetch(`${process.env.SERVER_URL}/teachers`).then((res) => res.json())
 
 	console.log(data)
 
