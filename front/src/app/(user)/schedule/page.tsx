@@ -1,4 +1,4 @@
-import { ScheduleList } from '@/widgets/schebule'
+import { ScheduleList } from '@/widgets/schedule'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

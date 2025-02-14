@@ -1,16 +1,27 @@
 'use client'
 
-import { type PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 
 import { TanstackQueryProvider, ThemeProvider, ToastProvider } from './index'
+import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl'
 
-export function MainProvider({ children }: PropsWithChildren<unknown>) {
+export function MainProvider({
+	children,
+	messages,
+	locale
+}: {
+	children: ReactNode
+	messages: AbstractIntlMessages
+	locale: string
+}) {
 	return (
-		<TanstackQueryProvider>
-			<ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-				<ToastProvider />
-				{children}
-			</ThemeProvider>
-		</TanstackQueryProvider>
+		<NextIntlClientProvider locale={locale} messages={messages}>
+			<TanstackQueryProvider>
+				<ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+					<ToastProvider />
+					{children}
+				</ThemeProvider>
+			</TanstackQueryProvider>
+		</NextIntlClientProvider>
 	)
 }

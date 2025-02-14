@@ -9,7 +9,6 @@ import {
 	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupLabel,
-	SidebarHeader,
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
@@ -21,6 +20,7 @@ import {
 } from '@/shared/ui'
 import { ChevronRight, CircleUserRound, GraduationCap, Newspaper } from 'lucide-react'
 import Link from 'next/link'
+import SwitchLang from '@/entities/switch-lang/ui'
 
 const data = {
 	main: [
@@ -104,6 +104,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				</SidebarGroup>
 			</SidebarContent>
 			<SidebarFooter>
+				<SidebarGroup className='p-0 group-data-[collapsible=icon]:block'>
+					<SwitchLang />
+				</SidebarGroup>
 				<SidebarGroup className='p-0 group-data-[collapsible=icon]:block'>
 					<SidebarGroupLabel>Смена темы</SidebarGroupLabel>
 					<ToggleTheme />

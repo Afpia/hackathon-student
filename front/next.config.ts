@@ -1,5 +1,9 @@
 import type { NextConfig } from 'next'
 
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin()
+
 const nextConfig: NextConfig = {
 	env: {
 		SERVER_URL: process.env.SERVER_URL,
@@ -7,4 +11,4 @@ const nextConfig: NextConfig = {
 	}
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

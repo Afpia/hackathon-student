@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 import { Geist } from 'next/font/google'
 import { MainProvider } from '@/shared/providers'
-import { ToggleTheme } from '@/shared/ui'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
 
 import '@/shared/styles/globals.css'
-import { Header } from '@/entities/header'
 
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -19,15 +19,18 @@ export const metadata: Metadata = {
 	description: 'Это хакатон проект, созданный для победы в хакатоне'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
 	children
 }: Readonly<{
 	children: React.ReactNode
 }>) {
+	const locale = await getLocale()
+	const messages = await getMessages()
+
 	return (
-		<html lang='en' suppressHydrationWarning>
+		<html lang={locale} suppressHydrationWarning>
 			<body className={geistSans.variable}>
-				<MainProvider>
+				<MainProvider messages={messages} locale={locale}>
 					<div className='h-screen w-full'>{children}</div>
 				</MainProvider>
 			</body>
